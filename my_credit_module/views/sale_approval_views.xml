@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_approval_form" model="ir.ui.view">
+        <field name="name">sale.approval.request.form</field>
+        <field name="model">sale.approval.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit" string="Yuborish" type="object" invisible="state != 'draft'" class="btn-primary"/>
+                    <button name="action_approve" string="Tasdiqlash" type="object" invisible="state != 'submitted'" class="btn-success"/>
+                    <button name="action_reject" string="Rad etish" type="object" invisible="state != 'submitted'" class="btn-danger"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sale_order_id" readonly="state != 'draft'"/>
+                            <field name="approved_by" invisible="state != 'approved'"/>
+                        </group>
+                        <group>
+                            <field name="total_amount"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_approval_request" model="ir.actions.act_window">
+        <field name="name">Sotuvni tasdiqlash so'rovlari</field>
+        <field name="res_model">sale.approval.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

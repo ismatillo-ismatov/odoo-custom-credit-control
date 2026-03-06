@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_customer_credit_limit_tree" model="ir.ui.view">
+        <field name="name">customer.credit.limit.tree</field>
+        <field name="model">customer.credit.limit</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="remaining_credit &lt; 0">
+                <field name="partner_id"/>
+                <field name="credit_limit"/>
+                <field name="total_due"/>
+                <field name="remaining_credit"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_customer_credit_limit" model="ir.actions.act_window">
+        <field name="name">Mijozlar kredit limiti</field>
+        <field name="res_model">customer.credit.limit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_credit_limit_root" name="Kredit Limit" sequence="10"/>
+
+    <menuitem id="menu_credit_limit_list"
+              name="Mijozlar Limiti"
+              parent="menu_credit_limit_root"
+              action="action_customer_credit_limit"
+              sequence="10"/>
+
+    <menuitem id="menu_approval_requests"
+              name="Tasdiqlash So'rovlari"
+              parent="menu_credit_limit_root"
+              action="action_sale_approval_request" 
+              sequence="20"/>
+</odoo>
